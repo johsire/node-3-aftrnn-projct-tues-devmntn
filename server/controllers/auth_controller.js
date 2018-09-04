@@ -7,13 +7,13 @@ module.exports = {
   const { session } = req;
   const { username, password } = req.body;
 
-  const user = user.find(user => user.username === username && user.password);
+  const user = users.find(user => user.username === username && user.password);
 
   if(user){
    session.user.username = user.username;
    res.status(200).send(session.user);
   } else {
-  res.status(500).send('Unauthorized');   
+  res.status(500).send('WARNING! WARNING! Unauthorized user!');   
    }
  },
 
@@ -21,12 +21,12 @@ module.exports = {
   const { session } = req;
   const { username, password } = req.body;
 
-  user.push({ id, username, password });
+  users.push({ id, username, password });
   id++;
 
   session.user.username = username;
 
-  res.status(200).send(swag);
+  res.status(200).send(session.user);
  },
 
  signout: (req, res, next) => {
