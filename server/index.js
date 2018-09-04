@@ -26,5 +26,5 @@ app.use(session({
 
 // Server listening/ running;
 app.listen(SERVER_PORT, () => {
- console.log(`The magice happens on port: ${SESSION_SECRET}`)
+ console.log(`The magice happens on port: ${SERVER_PORT}`)
 });
