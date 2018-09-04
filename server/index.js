@@ -4,6 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
+const checkForSession = require('./middlewares/checkForSession');
+
 const app = express();
 
 // Destructuring from dotenv file:
@@ -20,6 +22,8 @@ app.use(session({
  saveUninitialized: true,
 }));
 
+// middleware;
+app.use(checkForSession);
 
 
 
