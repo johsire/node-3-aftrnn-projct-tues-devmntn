@@ -4,13 +4,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
+// Middleware:
 const checkForSession = require('./middlewares/checkForSession');
+
+// Controller Functions/ Methods:
 const swag_controller = require('./controllers/swag_controller');
 const auth_controller = require('./controllers/auth_controller');
 const cart_controller = require('./controllers/cart_controller');
 const search_controller = require('./controllers/search_controller');
-
-
 
 
 const app = express();
@@ -32,6 +33,8 @@ app.use(session({
 // middleware;
 app.use(checkForSession);
 
+// express.static middleware serves the pre-built front-end.
+app.use(express.static(`${__dirname}/build`));
 
 // ENDPOINTS:
 // Swag_Controller End-Points:
@@ -47,6 +50,9 @@ app.get('/api/user', auth_controller.getUser);
 app.post('/api/cart', cart_controller.add);
 app.post('/api/cart/checkout', cart_controller.checkout);
 app.delete('/api/cart', cart_controller.delete);
+
+// Search_Controller End-Points:
+app.get('/api/search', search_controller.search);
 
 
 // Server listening/ running:
